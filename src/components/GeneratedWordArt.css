@@ -1,0 +1,37 @@
+@font-face {
+font-family: 'Parkway Lush Regular';
+font-style: normal;
+font-weight: normal;
+src: local('Parkway Lush Regular'), url('./font-faces/ParkwayLush-0WDj4.woff') format('woff');
+}
+
+@font-face {
+font-family: 'Borgsquad Regular';
+font-style: normal;
+font-weight: normal;
+src: local('Borgsquad Regular'), url('./font-faces/Borgsquad-JLxB.woff') format('woff');
+}
+
+@font-face {
+font-family: 'United Planets 3D Regular';
+font-style: normal;
+font-weight: normal;
+src: local('United Planets 3D Regular'), url('./font-faces/UnitedPlanets3D-035d.woff') format('woff');
+}
+
+.generated-wordart{
+	display: flex;
+	justify-content: center;
+}
+
+.style-1 {
+	font-family: 'Parkway Lush Regular';
+}
+
+.style-2 {
+	font-family: 'Borgsquad Regular';
+}
+
+.style-3 {
+	font-family: 'United Planets 3D Regular';
+}
