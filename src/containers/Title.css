@@ -1,0 +1,13 @@
+@font-face {
+font-family: 'Buddy Champion Bold Bold';
+font-style: normal;
+font-weight: normal;
+src: local('Buddy Champion Bold Bold'), url('./BuddyChampionBold-MKoY.woff') format('woff');
+}
+
+.label-container{
+  display: flex;
+  justify-content: center;
+  font-family: 'Buddy Champion Bold Bold';
+  font-size: 30px;
+}
