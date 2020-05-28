@@ -4,9 +4,24 @@ import './index.css';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 
+/*Redux Imports*/
+import {Provider,connect} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
+import {getUserInput} from './redux/reducers.js';
+
+//Redux logger:
+import {createLogger} from 'redux-logger';
+
+// create logger instance:
+const logger = createLogger();
+
+const store = createStore(getUserInput,applyMiddleware(logger));
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+  	<Provider store={store}>
+  		<App />
+  	</Provider>    
   </React.StrictMode>,
   document.getElementById('root')
 );

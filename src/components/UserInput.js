@@ -5,6 +5,8 @@ import './UserInput.css';
 
 const UserInput = (props) => {
   
+	console.log('UserInput.js - all props:',props);
+
   	//Extract input text from props:
 	const inputText = props.inputText;
 

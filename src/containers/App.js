@@ -14,23 +14,54 @@ import GeneratedWordArt from '../components/GeneratedWordArt.js';
 //Import the title component:
 import  Title from './Title.js';
 
-export default class App extends React.Component {
+/*Redux Imports*/
+import {connect} from 'react-redux';
+
+import {
+        setUserInputText,
+        setUserInputStyle,
+        setUserColorSelect,
+        setUserFontSize
+       } from '../redux/actions.js';
+
+const mapStateToProps = state => {
+
+  return (
+    {
+      userInput: {
+        inputText:state.userInput.inputText,
+        inputStyle:state.userInput.inputStyle,
+        colorSelect:state.userInput.colorSelect,
+        fontSize:state.userInput.fontSize
+      }
+    }
+  )
+}
+
+const mapDispatchToProps = (dispatch) => {
+
+  return {
+    onUserInputChange: (event)=> dispatch(setUserInputText(event.target.value)),
+    onStyleInputChange: (event)=> dispatch(setUserInputStyle(event.target.value)),
+    onColorSelectChange: (event)=> dispatch(setUserColorSelect(event.target.value)),
+    onFontSizeChange: (event)=> dispatch(setUserFontSize(event.target.value))
+  }
+}
+
+
+class App extends React.Component {
   
 
   constructor(props) {
     super(props);
 
-    this.state = {
-      userInput: {
-        inputText:'',
-        inputStyle:'',
-        colorSelect:'',
-        fontSize:''
-      }
-    }
+    
   }
 
+  
+
   //Handle user input. Pass as action.
+  /*
   onUserInputChange = (event)=>{
     
       this.setState(
@@ -46,13 +77,9 @@ export default class App extends React.Component {
   }
 
   onStyleInputChange = (event) =>{
-  
-    console.log('aaaaaa')
-
     this.setState(
         Object.assign(this.state,{
           userInput: {
-            inputText:this.state.userInput.inputText,
             inputStyle:event.target.value,            
             colorSelect:this.state.userInput.colorSelect,
             fontSize:this.state.userInput.fontSize
@@ -63,12 +90,9 @@ export default class App extends React.Component {
 
   onColorSelectChange = (event) =>{
   
-    console.log('aaaaaa')
-
     this.setState(
         Object.assign(this.state,{
           userInput: {
-            inputText:this.state.userInput.inputText,
             inputStyle:this.state.userInput.inputStyle,            
             colorSelect:event.target.value,
             fontSize:this.state.userInput.fontSize
@@ -82,7 +106,6 @@ export default class App extends React.Component {
     this.setState(
         Object.assign(this.state,{
           userInput: {
-            inputText:this.state.userInput.inputText,
             inputStyle:this.state.userInput.inputStyle,            
             colorSelect:this.state.userInput.colorSelect,
             fontSize:event.target.value+'px'
@@ -90,20 +113,19 @@ export default class App extends React.Component {
         })
       )   
   }
-
+*/
 
   
 
   //Print current state value:
   onClickPrintState = ()=>{
-    console.log('##### Current State is:',this.state.userInput)
+    console.log('##### Current State is:',this.state.userInput);
+
+    console.log('App.js - checking state:',this.props.userInput);
   }
 
 
   render() {
-
-    
-
     return (
       <div className='component-container'>
 
@@ -112,19 +134,20 @@ export default class App extends React.Component {
         </div>
       
         <div style={{backgroundColor: "blue"}}>
-           <UserInput inputText={this.state.userInput.inputText}
-                   inputStyle={this.state.userInput.inputStyle} 
-                   colorSelect={this.state.userInput.colorSelect}
-                   onUserInputChange={this.onUserInputChange}
-                   onStyleInputChange={this.onStyleInputChange}
-                   onColorSelectChange={this.onColorSelectChange}
-                   onFontSizeChange={this.onFontSizeChange}/>
+           <UserInput inputText={this.props.userInput.inputText}
+                   inputStyle={this.props.userInput.inputStyle} 
+                   colorSelect={this.props.userInput.colorSelect}
+                   fontSize={this.props.userInput.fontSize}
+                   onUserInputChange={this.props.onUserInputChange}
+                   onStyleInputChange={this.props.onStyleInputChange}
+                   onColorSelectChange={this.props.onColorSelectChange}
+                   onFontSizeChange={this.props.onFontSizeChange}/>
 /**/
           {<button onClick={this.onClickPrintState}>Print State</button>}
         </div>
         
         <div style={{backgroundColor: "#B4B4B4"}}>
-            <GeneratedWordArt userInput={this.state.userInput}/>
+            <GeneratedWordArt userInput={this.props.userInput}/>
         </div>
         
         <div><h2>nothing</h2></div>
@@ -132,3 +155,4 @@ export default class App extends React.Component {
     );
   }
 }
+export default connect(mapStateToProps,mapDispatchToProps)(App);
